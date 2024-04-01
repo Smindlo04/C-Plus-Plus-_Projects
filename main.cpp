@@ -1,19 +1,34 @@
 #include <iostream>
+#include <fstream> //Step 1
 
 using namespace std;
 
 int main()
 {
-    int list[6] = {1,2,3,4,5,6};
+    string info;
+    char answer;
 
-    for(int i = 0; i < 3; i++)
+    //Step 2 - declare file variable and open
+    ofstream outFile;
+                                    //adding a new file on the existing file
+    outFile.open("PhoneNumber.txt", ios::app);
+    //ofstream outFile("PhoneNumber.txt");
+
+    do
     {
-        int temp = list[i];
-        list[i] = list[5 - i];
-        list[5 - i] = temp;
+        cout << "Enter your name and number (XXX to stop): ";
+        getline(cin, info);
+
+        outFile << info << endl;
+
+        cout << "Do you want to enter another name & number (Y/N): ";
+        cin >> answer;
+
+        cin.ignore();
     }
-    for(int i = 0; i < 6; i++)
-        cout << list[i] << "\t";
+    while(toupper(answer) == 'Y');
+
+    outFile.close();
 
     return 0;
 }
